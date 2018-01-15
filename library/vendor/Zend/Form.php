@@ -18,6 +18,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+use Icinga\Exception\IcingaException;
+
 /** @see Zend_Validate_Interface */
 
 /**
@@ -2991,7 +2993,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             return $return;
         } catch (Exception $e) {
             $message = "Exception caught by form: " . $e->getMessage()
-                     . "\nStack Trace:\n" . $e->getTraceAsString();
+                     . "\nStack Trace:\n" . IcingaException::getConfidentialTraceAsString($e);
             trigger_error($message, E_USER_WARNING);
             return '';
         }
