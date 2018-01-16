@@ -279,7 +279,10 @@ class Donut
             'content' => array($svg)
         );
 
-        if ($this->getLabelBig() || $this->getLabelSmall()) {
+        $labelBig = (string) $this->getLabelBig();
+        $labelSmall = (string) $this->getLabelSmall();
+
+        if ($labelBig !== '' || $labelSmall !== '') {
             $labels = array(
                 'tag' => 'div',
                 'attributes' => array(
@@ -288,7 +291,7 @@ class Donut
                 'content' => array()
             );
 
-            if ($this->getLabelBig()) {
+            if ($labelBig !== '') {
                 $labels['content'][] =
                     array(
                         'tag' => 'a',
@@ -296,11 +299,11 @@ class Donut
                             'href' => $this->getLabelBigUrl() ? $this->getLabelBigUrl()->getAbsoluteUrl() : null,
                             'class' => 'donut-label-big'
                         ),
-                        'content' => $this->shortenLabel($this->getLabelBig())
+                        'content' => $this->shortenLabel($labelBig)
                     );
             }
 
-            if ($this->getLabelSmall()) {
+            if ($labelSmall !== '') {
                 $labels['content'][] = array(
                     'tag' => 'p',
                     'attributes' => array(
@@ -308,7 +311,7 @@ class Donut
                         'x' => '50%',
                         'y' => '50%'
                     ),
-                    'content' => $this->getLabelSmall()
+                    'content' => $labelSmall
                 );
             }
 
